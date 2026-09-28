@@ -1,34 +1,82 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Palo A New Beginning</title>
-    <!-- Cargando Tailwind CSS -->
+    <!-- Tailwind CSS with Dark Mode Configuration -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fuente Inter para un aspecto moderno -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'shimmer': 'shimmer 2.5s infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.2, transform: 'scale(1)' },
+                            '50%': { opacity: 0.45, transform: 'scale(1.08)' },
+                        },
+                        shimmer: {
+                            '100%': { transform: 'translateX(100%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #fafafa;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
         
-        /* Animaciones suaves */
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
+        /* Animaciones para scroll reveal */
+        .reveal {
             opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
 
-        /* Ocultar scrollbar en elementos horizontales */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Ocultar scrollbar sin deshabilitar scroll */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -36,31 +84,76 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Efecto de tarjetas y brillo */
+        .glass-card {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Animación suave para cambio de icono de tema */
+        .theme-icon-spin {
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .theme-btn:hover .theme-icon-spin {
+            transform: rotate(45deg) scale(1.1);
+        }
     </style>
 </head>
-<body class="text-gray-800 antialiased selection:bg-gray-200 selection:text-black">
+<body class="bg-gray-50 text-gray-900 dark:bg-zinc-950 dark:text-gray-100 antialiased selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
 
-    <nav class="bg-white/90 backdrop-blur-md fixed w-full z-50 border-b border-gray-100 transition-all duration-300">
+    <!-- Header / Nav -->
+    <nav class="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md fixed w-full z-50 border-b border-gray-200/80 dark:border-zinc-800/80 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-2">
-                    <svg class="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85-.29-.15-.65-.06-.83.22l-1.88 3.24c-2.86-1.21-6.08-1.21-8.94 0L5.65 5.67c-.19-.28-.56-.38-.85-.22-.31.16-.42.54-.26.85l1.84 3.18C2.73 11.61.5 15.65.5 20h23c0-4.35-2.23-8.39-5.9-10.52zM8.1 17.04c-.66 0-1.2-.54-1.2-1.2s.54-1.2 1.2-1.2 1.2.54 1.2 1.2-.54 1.2-1.2 1.2zm7.8 0c-.66 0-1.2-.54-1.2-1.2s.54-1.2 1.2-1.2 1.2.54 1.2 1.2-.54 1.2-1.2 1.2z"/>
-                    </svg>
-                    <a href="#" class="text-2xl font-bold tracking-tighter text-black">Palo A New Beginning</a>
-                </div>
+                <a href="#inicio" class="flex items-center gap-3 group focus:outline-none">
+                    <div class="w-10 h-10 rounded-xl bg-black dark:bg-white text-white dark:text-black flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85-.29-.15-.65-.06-.83.22l-1.88 3.24c-2.86-1.21-6.08-1.21-8.94 0L5.65 5.67c-.19-.28-.56-.38-.85-.22-.31.16-.42.54-.26.85l1.84 3.18C2.73 11.61.5 15.65.5 20h23c0-4.35-2.23-8.39-5.9-10.52zM8.1 17.04c-.66 0-1.2-.54-1.2-1.2s.54-1.2 1.2-1.2 1.2.54 1.2 1.2-.54 1.2-1.2 1.2zm7.8 0c-.66 0-1.2-.54-1.2-1.2s.54-1.2 1.2-1.2 1.2.54 1.2 1.2-.54 1.2-1.2 1.2z"/>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black tracking-tighter text-black dark:text-white leading-none">Palo A New Beginning</span>
+                        <span class="text-[10px] tracking-widest font-semibold uppercase text-gray-500 dark:text-gray-400">A New Beginning</span>
+                    </div>
+                </a>
                 
                 <!-- Menú de Escritorio -->
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#inicio" class="text-gray-500 hover:text-black transition-colors px-3 py-2 text-sm font-medium">Inicio</a>
-                    <a href="#juegos" class="text-gray-500 hover:text-black transition-colors px-3 py-2 text-sm font-medium">Catálogo</a>
-                    <a href="" target="_blank" class="bg-black text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors shadow-sm">Descargar App</a>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#inicio" class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors px-3 py-2 text-sm font-medium">Inicio</a>
+                    <a href="#juegos" class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors px-3 py-2 text-sm font-medium">Catálogo</a>
+                    <a href="#caracteristicas" class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors px-3 py-2 text-sm font-medium">Ventajas</a>
+                    
+                    <!-- Botón Selector de Tema Oscuro / Claro -->
+                    <button id="theme-toggle" type="button" aria-label="Cambiar tema" class="theme-btn p-2.5 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition-all duration-300">
+                        <!-- Icono Sol (Tema claro activo) -->
+                        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 theme-icon-spin text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                        <!-- Icono Luna (Tema oscuro activo) -->
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 theme-icon-spin text-zinc-700" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </button>
+
+                    <a href="https://www.mediafire.com/file/s6wae73ng8gyurq/Palo_Store.apk/file" target="_blank" rel="noopener noreferrer" class="relative group overflow-hidden bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
+                        <span class="relative z-10 flex items-center gap-2">
+                            <span>Descargar App</span>
+                            <svg class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
                 </div>
 
-                <!-- Botón Menú Móvil -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-500 hover:text-black focus:outline-none p-2">
+                <!-- Botones Menú Móvil & Tema Móvil -->
+                <div class="md:hidden flex items-center gap-2">
+                    <button id="theme-toggle-mobile" type="button" aria-label="Cambiar tema" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none">
+                        <svg id="theme-toggle-light-icon-mobile" class="hidden w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                        <svg id="theme-toggle-dark-icon-mobile" class="hidden w-5 h-5 text-zinc-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    </button>
+                    
+                    <button id="mobile-menu-btn" aria-label="Abrir menú" class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white focus:outline-none p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
@@ -69,55 +162,110 @@
             </div>
         </div>
 
-        <!-- Menú Móvil (Oculto por defecto) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full shadow-lg">
-            <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col items-center">
-                <a href="#inicio" class="block text-gray-600 hover:text-black py-3 text-base font-medium w-full text-center border-b border-gray-50">Inicio</a>
-                <a href="#juegos" class="block text-gray-600 hover:text-black py-3 text-base font-medium w-full text-center border-b border-gray-50">Catálogo</a>
-                <a href="https://www.mediafire.com/file/s6wae73ng8gyurq/Palo_Store.apk/file" target="_blank" class="block bg-black text-white px-5 py-3 rounded-full text-base font-medium hover:bg-gray-800 mt-4 w-3/4 text-center">Descargar App</a>
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-zinc-900/95 backdrop-blur-lg border-b border-gray-200 dark:border-zinc-800 absolute w-full shadow-2xl transition-all duration-300">
+            <div class="px-6 pt-4 pb-8 space-y-3 flex flex-col items-center">
+                <a href="#inicio" class="block text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white py-2 text-base font-semibold w-full text-center border-b border-gray-100 dark:border-zinc-800">Inicio</a>
+                <a href="#juegos" class="block text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white py-2 text-base font-semibold w-full text-center border-b border-gray-100 dark:border-zinc-800">Catálogo</a>
+                <a href="#caracteristicas" class="block text-gray-700 dark:text-gray-200 hover:text-black dark:hover:text-white py-2 text-base font-semibold w-full text-center border-b border-gray-100 dark:border-zinc-800">Ventajas</a>
+                <a href="https://www.mediafire.com/file/s6wae73ng8gyurq/Palo_Store.apk/file" target="_blank" rel="noopener noreferrer" class="block bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-full text-base font-bold hover:opacity-90 mt-4 w-full text-center shadow-lg">
+                    Descargar APK Oficial
+                </a>
             </div>
         </div>
     </nav>
 
     <!-- Sección Hero -->
-    <main id="inicio" class="pt-32 pb-16 sm:pt-40 sm:pb-24 overflow-hidden bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div class="text-center max-w-4xl mx-auto fade-in">
-                <span class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-4 block">Juegos y Ports para Android</span>
-                <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold text-black tracking-tight mb-8 leading-[1.1]">
+    <main id="inicio" class="relative pt-36 pb-20 sm:pt-44 sm:pb-32 overflow-hidden bg-white dark:bg-zinc-950 transition-colors duration-400">
+        <!-- Fondos animados brillantes / Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/10 dark:bg-emerald-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
+        <div class="absolute top-1/3 left-1/4 w-[350px] h-[350px] bg-sky-500/10 dark:bg-sky-500/15 rounded-full blur-3xl pointer-events-none animate-float" style="animation-delay: -2s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto">
+                <!-- Badge interactivo -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 mb-8 animate-float">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span class="text-xs font-bold tracking-wider text-gray-600 dark:text-gray-300 uppercase">Juegos y Ports para Android</span>
+                </div>
+
+                <h1 class="text-5xl sm:text-6xl md:text-7xl font-black text-gray-900 dark:text-white tracking-tight mb-8 leading-[1.08] reveal">
                     Tu tienda favorita, <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-black">ahora en tu bolsillo.</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-sky-500 dark:from-emerald-400 dark:via-teal-300 dark:to-sky-400">
+                        ahora en tu bolsillo.
+                    </span>
                 </h1>
-                <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl text-gray-500 mb-10 font-light">
-                    Descarga Palo A New Beginning para encontrar los mejores juegos para Android, incluyendo clásicos y las últimas novedades.
+
+                <p class="mt-4 max-w-2xl mx-auto text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-10 font-normal leading-relaxed reveal" style="transition-delay: 0.1s;">
+                    Descarga <span class="font-semibold text-gray-900 dark:text-white">Palo A New Beginning</span> para explorar la mejor colección de títulos, clásicos inolvidables y adaptaciones exclusivas para tu Android.
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="" target="_blank" class="bg-black text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-800 hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-black/20 flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        APK Oficial
+
+                <!-- Botones de Acción Hero -->
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 reveal" style="transition-delay: 0.2s;">
+                    <a href="https://www.mediafire.com/file/s6wae73ng8gyurq/Palo_Store.apk/file" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-800 dark:hover:bg-gray-100 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-black/10 dark:shadow-white/5 flex items-center justify-center gap-3 group">
+                        <svg class="w-6 h-6 text-emerald-400 dark:text-emerald-600 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <span>Descargar APK Oficial</span>
                     </a>
-                    <a href="#juegos" class="bg-white text-black border-2 border-gray-200 px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-50 hover:border-black transition-all duration-300">
-                        Ver Catálogo
+                    
+                    <a href="#juegos" class="w-full sm:w-auto bg-white dark:bg-zinc-900 text-gray-900 dark:text-white border-2 border-gray-200 dark:border-zinc-800 px-8 py-4 rounded-full text-lg font-semibold hover:border-black dark:hover:border-white transition-all duration-300 text-center hover:-translate-y-1">
+                        Explorar Catálogo ↓
                     </a>
+                </div>
+
+                <!-- Métricas destacadas -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-2xl mx-auto mt-16 pt-10 border-t border-gray-100 dark:border-zinc-900 reveal" style="transition-delay: 0.3s;">
+                    <div class="flex flex-col items-center">
+                        <span class="text-2xl sm:text-3xl font-black text-black dark:text-white">100%</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium mt-1">Gratis y Seguro</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-2xl sm:text-3xl font-black text-black dark:text-white">Directo</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium mt-1">Mediafire Links</span>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1 flex flex-col items-center">
+                        <span class="text-2xl sm:text-3xl font-black text-black dark:text-white">Buena</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 font-medium mt-1">Calidad Garantizada</span>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Sección de Juegos (Grid y Buscador) -->
-    <section id="juegos" class="py-24 bg-[#fafafa] min-h-screen">
+    <!-- Sección de Juegos (Buscador, Filtros y Grid) -->
+    <section id="juegos" class="py-24 bg-gray-100/70 dark:bg-zinc-900/60 min-h-screen transition-colors duration-400 border-t border-gray-200/60 dark:border-zinc-800/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+            
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 gap-6 reveal">
                 <div>
-                    <h2 class="text-3xl font-bold text-black tracking-tight">Catálogo de Juegos</h2>
-                    <p class="text-gray-500 mt-2">Explora y descarga cientos de juegos para tu Android.</p>
+                    <div class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2">
+                        <span>Librería de Videojuegos</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight">Catálogo Disponible</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2 font-normal">Encuentra tus títulos favoritos e instálalos fácilmente.</p>
                 </div>
                 
-                <!-- Buscador -->
-                <div class="w-full md:w-96 relative">
-                    <input type="text" id="buscador" placeholder="Buscar juego..." class="w-full bg-white border border-gray-200 text-gray-900 text-sm rounded-xl focus:ring-black focus:border-black block px-4 py-3 pl-10 transition-colors shadow-sm">
-                    <svg class="w-5 h-5 text-gray-400 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <!-- Buscador Animado -->
+                <div class="w-full lg:w-96 relative">
+                    <input type="text" id="buscador" placeholder="Buscar por nombre, categoría..." class="w-full bg-white dark:bg-zinc-950 border border-gray-300 dark:border-zinc-800 text-gray-900 dark:text-white text-sm rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block px-4 py-3.5 pl-11 transition-all duration-300 shadow-sm placeholder-gray-400 dark:placeholder-gray-500">
+                    <svg class="w-5 h-5 text-gray-400 dark:text-gray-500 absolute left-3.5 top-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <button id="clear-search" class="hidden absolute right-3.5 top-3.5 text-gray-400 hover:text-gray-600 dark:hover:text-white text-xs bg-gray-100 dark:bg-zinc-800 p-1 rounded-full">✕</button>
                 </div>
+            </div>
+
+            <!-- Filtros Rápidos por Categoría -->
+            <div id="categoria-filtros" class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar reveal" style="transition-delay: 0.1s;">
+                <button data-categoria="todos" class="btn-categoria bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap shadow-sm">Todos</button>
+                <button data-categoria="FPS" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">FPS</button>
+                <button data-categoria="Acción" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">Acción</button>
+                <button data-categoria="Terror" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">Terror / Horror</button>
+                <button data-categoria="Fútbol" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">Fútbol</button>
+                <button data-categoria="Plataformas" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">Plataformas</button>
+                <button data-categoria="Estrategia" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">Estrategia</button>
+            </div>
+
+            <!-- Contador de juegos -->
+            <div class="mb-6 flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 font-semibold px-1">
+                <span id="contador-juegos">Mostrando juegos...</span>
             </div>
 
             <!-- Contenedor donde se insertarán los juegos por JavaScript -->
@@ -126,56 +274,74 @@
             </div>
             
             <!-- Mensaje cuando no hay resultados en el buscador -->
-            <div id="no-resultados" class="hidden text-center py-20">
-                <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <h3 class="text-xl font-bold text-gray-900 mb-1">No se encontraron juegos</h3>
-                <p class="text-gray-500">Intenta con otro término de búsqueda.</p>
+            <div id="no-resultados" class="hidden text-center py-24 bg-white dark:bg-zinc-950 rounded-3xl border border-gray-200 dark:border-zinc-800 mt-4 shadow-sm">
+                <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gray-100 dark:bg-zinc-900 flex items-center justify-center text-gray-400">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h3 class="text-xl font-extrabold text-gray-900 dark:text-white mb-1">No se encontraron resultados</h3>
+                <p class="text-gray-500 dark:text-gray-400 text-sm max-w-sm mx-auto">Prueba buscando con otra palabra o selecciona la opción "Todos" en los filtros.</p>
+                <button id="reset-search-btn" class="mt-6 px-6 py-2.5 bg-black dark:bg-white text-white dark:text-black rounded-full text-xs font-bold hover:opacity-90 transition-opacity">
+                    Restablecer Búsqueda
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Por qué elegirnos -->
-    <section class="py-24 bg-white border-y border-gray-100">
+    <!-- Sección ¿Por qué elegirnos? -->
+    <section id="caracteristicas" class="py-24 bg-white dark:bg-zinc-950 border-y border-gray-200/80 dark:border-zinc-800/80 transition-colors duration-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-black tracking-tight">¿Por qué usar Palo A New Beginning?</h2>
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="text-xs font-extrabold tracking-widest text-emerald-600 dark:text-emerald-400 uppercase">Experiencia Optimizada</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight mt-2">¿Por qué usar Palo Store?</h2>
+                <p class="text-gray-500 dark:text-gray-400 mt-3 font-normal">Te ofrecemos la mejor manera de descubrir e instalar juegos en tu teléfono Android.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="text-center">
-                    <div class="w-16 h-16 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tarjeta 1 -->
+                <div class="p-8 rounded-3xl bg-gray-50 dark:bg-zinc-900 border border-gray-200/80 dark:border-zinc-800 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group reveal">
+                    <div class="w-14 h-14 bg-emerald-100 dark:bg-emerald-950/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-black mb-3">Seguro</h3>
-                    <p class="text-gray-500 font-light">Juegos para tu dispositivo.</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">100% Seguro</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Títulos probados y verificados para garantizar compatibilidad y óptimo rendimiento en tu dispositivo Android.</p>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+
+                <!-- Tarjeta 2 -->
+                <div class="p-8 rounded-3xl bg-gray-50 dark:bg-zinc-900 border border-gray-200/80 dark:border-zinc-800 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group reveal" style="transition-delay: 0.1s;">
+                    <div class="w-14 h-14 bg-sky-100 dark:bg-sky-950/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7 text-sky-600 dark:text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-black mb-3">Enlaces Directos</h3>
-                    <p class="text-gray-500 font-light">Descargas rápidas por MediaFire.</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Enlaces Directos</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Descargas inmediatas alojadas en servidores rápidos como MediaFire, sin acortadores molestos.</p>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+
+                <!-- Tarjeta 3 -->
+                <div class="p-8 rounded-3xl bg-gray-50 dark:bg-zinc-900 border border-gray-200/80 dark:border-zinc-800 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group reveal" style="transition-delay: 0.2s;">
+                    <div class="w-14 h-14 bg-purple-100 dark:bg-purple-950/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-black mb-3">Actualizado</h3>
-                    <p class="text-gray-500 font-light">Siempre buscamos traer las últimas versiones.</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Siempre Actualizado</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Renovamos continuamente el catálogo para agregarte las últimas versiones, parches y nuevos lanzamientos.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-white py-12 border-t border-gray-100">
+    <footer class="bg-white dark:bg-zinc-950 py-12 transition-colors duration-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0 text-center md:text-left">
-                    <span class="text-xl font-bold tracking-tighter text-black flex items-center justify-center md:justify-start gap-2">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <span class="text-xl font-black tracking-tighter text-gray-900 dark:text-white flex items-center justify-center md:justify-start gap-2">
                         Palo A New Beginning
                     </span>
-                    <p class="text-gray-400 text-sm mt-2">© 2026 Palo A New Beginning Android.</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">© 2026 Palo Store Android. Todos los derechos reservados.</p>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <button id="back-to-top" aria-label="Volver arriba" class="p-3 rounded-full bg-gray-100 dark:bg-zinc-900 text-gray-700 dark:text-gray-300 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -183,12 +349,59 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Lógica Menú Móvil
-            const btn = document.getElementById('mobile-menu-btn');
+            
+            // --- LOGICA DE CAMBIO DE TEMA OSCURO / CLARO ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+            
+            const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            const lightIcon = document.getElementById('theme-toggle-light-icon');
+            const darkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
+            const lightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
+
+            function applyTheme(isDark) {
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    if(darkIcon) darkIcon.classList.add('hidden');
+                    if(lightIcon) lightIcon.classList.remove('hidden');
+                    if(darkIconMobile) darkIconMobile.classList.add('hidden');
+                    if(lightIconMobile) lightIconMobile.classList.remove('hidden');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    if(darkIcon) darkIcon.classList.remove('hidden');
+                    if(lightIcon) lightIcon.classList.add('hidden');
+                    if(darkIconMobile) darkIconMobile.classList.remove('hidden');
+                    if(lightIconMobile) lightIconMobile.classList.add('hidden');
+                }
+            }
+
+            // Comprobar preferencia previa guardada o del sistema
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                applyTheme(true);
+            } else {
+                applyTheme(false);
+            }
+
+            function toggleTheme() {
+                const isCurrentDark = document.documentElement.classList.contains('dark');
+                applyTheme(!isCurrentDark);
+            }
+
+            if(themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+            if(themeToggleBtnMobile) themeToggleBtnMobile.addEventListener('click', toggleTheme);
+
+
+            // --- LOGICA MENU MOVIL ---
+            const btnMenu = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
 
-            if(btn && menu) {
-                btn.addEventListener('click', () => {
+            if(btnMenu && menu) {
+                btnMenu.addEventListener('click', () => {
                     menu.classList.toggle('hidden');
                 });
 
@@ -200,7 +413,22 @@
                 });
             }
 
-            // --- BASE DE DATOS DE JUEGOS ---
+
+            // --- ANIMACION SCROLL REVEAL ---
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+
+            // --- BASE DE DATOS COMPLETA DE JUEGOS (MANTENIENDO TODOS LOS EXISTENTES) ---
             const todosLosJuegos = [
                 {
                     nombre: "Cruel",
@@ -208,134 +436,133 @@
                     imagen: "https://i.ytimg.com/vi/CcoY0MdsT8c/hqdefault.jpg",
                     enlace: "https://www.mediafire.com/file/vwmxf5jthoimibx/Cruel_v1.0.0.apk/file",
                     descripcion: "CRUEL te lanza a un mundo retorcido. Desorientado y atrapado en un hotel extraño, encuentras un cuerpo sin vida."
-                }, // <-- La coma vital
-
-                 
+                },
                 {
                     nombre: "Minecraft Dungeons",
                     categoria: "Acción",
                     imagen: "https://store-images.s-microsoft.com/image/apps.2957.14045794648370014.2229d39b-90c3-496e-8fac-9987450ca4d8.680871e0-da2a-4109-8e2c-4bc75b2d56f8",
                     enlace: "https://www.mediafire.com/file/vsanm78cxfmy31s/MD.apk/file",
                     descripcion: "Minecraft Dungeons es un juego de acción y exploración de mazmorras para hasta 4 jugadores, ambientado en el universo de Minecraft."
-                }, // <-- La coma vital
-
+                },
                 {
-                    nombre: "Slient Hill",
+                    nombre: "Silent Hill",
                     categoria: "Terror",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEheYQmIyWCJq2XHWmm8aa0nPd75EbxRse-iMa8paTITbtPoo8_u4-hfvLke7uxcbVrQ-lzqz7rxy7eVXIA7bNnv88yaqVncMRuSBxWyHaFO1gk5cFuxNYA2UbTdjRJ0yii8u1pqFRl-UZwxNhofe0jMZPPsxj1UV67nc4hpMuB8lEf52_ON_L7hEgoGsWw/s320/SH1Boxart.webp",
                     enlace: "https://www.mediafire.com/file/yigo6k3ry4c75mk/Silent_Hill_Android.zip/file",
-                    descripcion: "Silent Hill (1999) es un videojuego de terror psicológico y survival horror desarrollado por Team Silent y publicado por Konami para la PlayStation original"
-                }, // <-- La coma vital
-
+                    descripcion: "Silent Hill (1999) es un videojuego de terror psicológico y survival horror desarrollado por Team Silent y publicado por Konami para la PlayStation original."
+                },
                 {
                     nombre: "FIFA 14",
                     categoria: "Fútbol",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNOL2z_-7VCsjS6BQatBLnu5ErL-lR5ZWZKT9sDC3YC72INbE4t9hmvcJxHb-1aGkBO9NO_gkbUk0jQWH2KnJHvCaJElpTh3Jq0xRKrQj9sFO9XNYDMVQiOkrAb_NmAG5cen-8c5w93juhyphenhyphen6OtSH_7NngkZMV-CmoCMcNznvLKgM55mHVCuUMOer9lgqg/w200-h200/OIP-3848931708.jpg",
                     enlace: "https://drive.google.com/file/d/1Z8aChxAsKPHMyOzFTox9CptMkpiulU40/view?pli=1",
-                    descripcion: "incluía más de 30 ligas oficiales, más de 600 equipos con licencia y más de 16.000 jugadores con nombres reales, entre ellas la Premier League, La Liga y la Bundesliga."
-                }, // <-- La coma vital
-
-
+                    descripcion: "Incluía más de 30 ligas oficiales, más de 600 equipos con licencia y más de 16.000 jugadores con nombres reales, entre ellas la Premier League, La Liga y la Bundesliga."
+                },
                 {
                     nombre: "CloverPit",
-                    categoria: "Horror",
+                    categoria: "Terror",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgeKBAhYknROwE56g9AP_TN8XxeVrUuAVfHIHqYlUazcdFTGCOIwW0fGPIICnlf_g-xrPHfijWWIPnlvpmhauhW8nfJdIzGv4gMnHYrX5nOo0b7693YuT9MtrxETgx3_JEdduEKTghiXGrUnrwYKgjFU38_7e_o-cbOuP-n4NI9OUrLVXpJmZ0_8fI_Auw/s320/images.jpeg",
                     enlace: "https://www.mediafire.com/file/39npj0erxhl1uo6/CloverPit_By_Palo_Store.apk/file",
-                    descripcion: "CloverPit es un juego de realidad alternativa (ARG) y una experiencia de horror analógico alojada principalmente en un sitio web que simula ser un portal de juegos retro o un foro de nicho de los años 90 y principios de los 2000."
-                }, // <-- La coma vital
-
-
+                    descripcion: "CloverPit es un juego de realidad alternativa (ARG) y una experiencia de horror analógico alojada principalmente en un sitio web que simula ser un portal de juegos retro."
+                },
                 {
                     nombre: "Ultrakill",
                     categoria: "FPS",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDucJrVwXD3EwwKtmMy_ehHwzy_hlwkFAxzIOGzUgaY0B9PRlE1f2UmNo00eqAIlqGxcr-E_sKdRtLq1M5DQRZfVNxGoaEVLoInrnqWgzpl08ixjY6yhUWwhD6geQlKt5HDWSaBYlMHHC96gb7uAl9-5vrVZLt3rVPSRBSiF6MaXwpSO1eD4Y6bJRAdEc/s320/MV5BNjdmNDU5ZTEtOTVlNS00MWRkLTljMTktZjA5YjA5OWI4MmFjXkEyXkFqcGc@._V1_.jpg",
                     enlace: "https://www.mediafire.com/file/43hxxai0swx0irz/ULTRAKILL.apk/file",
-                    descripcion: "ULTRAKILL es un videojuego de disparos en primera persona (FPS) ultraviolento y de ritmo rapidísimo, que evoca la estética y jugabilidad."
-                }, // <-- La coma vital
-
+                    descripcion: "ULTRAKILL es un videojuego de disparos en primera persona (FPS) ultraviolento y de ritmo rapidísimo, que evoca la estética y jugabilidad retro."
+                },
                 {
                     nombre: "Celeste",
                     categoria: "Plataformas",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwlgm5AFUVedHq8vfIGcr6Vr5C-5FBOavHXEU8lutUPy-7pFlR4SkU7b1fhL31MVPUvOpfr9Jq2QUPKRGRevAiSJjU9Mo5E_ZKnc-6v-dFVxN7KR3NmLWRvE6OmzGd0ySQnaJlAKTy8BXR2PXxG_k8pwhPjlTrdRzJDjSNJ6ENlfe0meQvtbdFEtAoykg/s320/691ba3e0801180a9864cc8a7694b6f98097f9d9799bc7e3dc6db92f086759252.jpeg",
                     enlace: "https://www.mediafire.com/file/wg55glm0if7gpcj/Celeste_-_PaloStore.apk/file",
                     descripcion: "Celeste es un aclamado videojuego de plataformas independiente que combina un gameplay exigente con una historia muy emotiva y personal."
-                }, // <-- La coma vital
-
+                },
                 {
                     nombre: "Gambonanza",
                     categoria: "Estrategia",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgId0KwVrRCipmHS-aFdQA0zgK6pt7C48S8z85BEnHaKddrenCSHl1LrkWjXoaMr3XjJotk-FMEB_lT7-ClH25nNG9cLiix44sMwLAn3BcwoIXOH_VrDbSeUTX9FHKycR5dQELVu0QQqbOS5AUjYMRPLuduTOxGP-t49Kc0c_BD0akOzXmEEyedGD4LagA/s320/capsule_616x353%20(1).jpg",
                     enlace: "https://www.mediafire.com/file/270jm1wdtob4ek1/Gambonanza.apk/file",
                     descripcion: "Es un juego que toma las reglas del ajedrez y las transforma en una experiencia arcade o de rompecabezas más dinámica."
-                }, // <-- La coma vital
-
+                },
                 {
                     nombre: "Dead Cells",
-                    categoria: "Accion",
+                    categoria: "Acción",
                     imagen: "https://assets1.ignimgs.com/2019/06/10/dead-cells---button-fin-1560125633132.jpg?fit=bounds&dpr=1&quality=75&width=188px",
                     enlace: "https://www.mediafire.com/file/76qtmofe3tgpy5i/Dead_Cells_Palo_Store.apk/file",
-                    descripcion: "Dead Cells es un aclamado videojuego que fusiona dos géneros muy populares: roguelike (si mueres, pierdes tu progreso de esa partida"
-                }, // <-- La coma vital
-
+                    descripcion: "Dead Cells es un aclamado videojuego que fusiona dos géneros muy populares: roguelike (si mueres, pierdes tu progreso de esa partida) y metroidvania."
+                },
                 {
-                    nombre: "The Amazing Spider-man 2",
-                    categoria: "Accion",
+                    nombre: "The Amazing Spider-Man 2",
+                    categoria: "Acción",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5NZ8ngssa8dyEUTHaFf_Ijd30tqixhdYXGrV21Q9PqUlEX4X1xEV4Vog8AJu3jZ4Hb0E6P2Ru5ueCLFK4iqAqS06iZZ_bjmKnl2XnEe58pLzfNb1ycJt9lEHk_-jwip-n90VeKmOcNWyQ1KLufU8im-wsKPAXLxvWnOOnzwQ3zjCtAM-BykEnC4tZ-tM/s320/p9957538_v_h8_ab-493056462.jpg",
                     enlace: "https://www.mediafire.com/file/er1f1i6mcgx71g0/Spider_Man_2.rar/file",
-                    descripcion: "Una recreación bastante amplia de Manhattan dividida en 6 distritos detallados (desde Times Square hasta Central Park) con gráficos que, para su época, eran de nivel de consola portátil",
-                }, // <-- La coma vital
-
+                    descripcion: "Una recreación bastante amplia de Manhattan dividida en 6 distritos detallados con gráficos de excelente calidad para dispositivos móviles."
+                },
                 {
                     nombre: "Carrion",
-                    categoria: "Horror",
+                    categoria: "Terror",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEcHIBZTJRRHydaS3rGkVt9ak178ieO4q-Vv4xw76-lynWrUQ7inOP2aUXk0BW1IWJ8xF2nKZGYtJtmgCuZpaaCIfQAN4K8JfGJlNcdiwJE35gNs_MiZjt6jSJBYAF4bOTmU1vMMmnvmtkyRVtYc785B4w_H8Y3N_ay6Yyr_Tw34aoZbsI_gMfzeag1ZU/s320/maxresdefault.jpg",
                     enlace: "https://www.mediafire.com/file/lp6u2xm22u8z20s/Carrion.apk/file",
-                    descripcion: "El diseño del juego sigue la estructura de un Metroidvania (un mapa interconectado que requiere nuevas habilidades para desbloquear caminos), pero centrado en el movimiento fluido y la destrucción:",
-                }, // <-- La coma vital
-
-
-
-
-
-                // PEGA TU SIGUIENTE JUEGO AQUÍ ABAJO (Recuerda poner las llaves { } )
-                
+                    descripcion: "El diseño del juego sigue la estructura de un Metroidvania centrado en el movimiento fluido, sigilo y destrucción como criatura."
+                }
             ];
 
-            // Elementos del DOM
+
             const gridJuegos = document.getElementById('grid-juegos');
             const buscadorInput = document.getElementById('buscador');
+            const clearSearchBtn = document.getElementById('clear-search');
             const mensajeNoResultados = document.getElementById('no-resultados');
+            const contadorJuegos = document.getElementById('contador-juegos');
+            const categoriaBtns = document.querySelectorAll('.btn-categoria');
+            const resetSearchBtn = document.getElementById('reset-search-btn');
 
-            // Función para renderizar los juegos en pantalla
+            let categoriaActual = 'todos';
+
             function renderizarJuegos(juegosParaMostrar) {
                 if(!gridJuegos) return; 
                 
                 gridJuegos.innerHTML = ''; 
+
+                if (contadorJuegos) {
+                    contadorJuegos.textContent = `Mostrando ${juegosParaMostrar.length} de ${todosLosJuegos.length} juegos`;
+                }
 
                 if (juegosParaMostrar.length === 0) {
                     if(mensajeNoResultados) mensajeNoResultados.classList.remove('hidden');
                 } else {
                     if(mensajeNoResultados) mensajeNoResultados.classList.add('hidden');
                     
-                    juegosParaMostrar.forEach(juego => {
+                    juegosParaMostrar.forEach((juego, index) => {
                         const card = document.createElement('div');
-                        card.className = "bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between h-full fade-in";
                         
+                        // Clases con hover animations y soporte tema oscuro
+                        card.className = "bg-white dark:bg-zinc-950 rounded-3xl p-5 shadow-sm hover:shadow-2xl border border-gray-200/80 dark:border-zinc-800/80 hover:border-black dark:hover:border-zinc-600 hover:-translate-y-2 transition-all duration-300 group flex flex-col justify-between h-full relative overflow-hidden";
+                        
+                        // Animación escalonada según índice
+                        card.style.animation = `fadeInUp 0.5s ease-out ${index * 0.05}s forwards`;
+                        card.style.opacity = '0';
+
                         card.innerHTML = `
                             <div>
                                 <div class="flex items-center gap-4 mb-4">
-                                    <div class="w-16 h-16 rounded-xl overflow-hidden shadow-sm group-hover:scale-105 transition-transform shrink-0">
+                                    <div class="w-16 h-16 rounded-2xl overflow-hidden shadow-md group-hover:scale-110 transition-transform duration-300 shrink-0 border border-gray-100 dark:border-zinc-800">
                                         <img src="${juego.imagen}" alt="${juego.nombre}" class="w-full h-full object-cover" loading="lazy">
                                     </div>
-                                    <div>
-                                        <h3 class="font-bold text-black text-lg leading-tight line-clamp-2">${juego.nombre}</h3>
-                                        <span class="text-[10px] uppercase tracking-wider text-gray-500 font-bold bg-gray-50 px-2 py-1 rounded mt-1 inline-block">${juego.categoria}</span>
+                                    <div class="overflow-hidden">
+                                        <h3 class="font-extrabold text-gray-900 dark:text-white text-base sm:text-lg leading-snug line-clamp-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">${juego.nombre}</h3>
+                                        <span class="text-[10px] uppercase tracking-wider text-emerald-700 dark:text-emerald-300 font-extrabold bg-emerald-50 dark:bg-emerald-950/80 px-2.5 py-1 rounded-lg mt-1.5 inline-block border border-emerald-200/60 dark:border-emerald-800/60">
+                                            ${juego.categoria}
+                                        </span>
                                     </div>
                                 </div>
-                                <p class="text-xs text-gray-500 mb-5 line-clamp-3">${juego.descripcion}</p>
+                                <p class="text-xs text-gray-600 dark:text-gray-400 mb-6 line-clamp-3 leading-relaxed font-light">${juego.descripcion}</p>
                             </div>
-                            <a href="${juego.enlace}" target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-black text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-gray-800 transition-colors shadow-sm">
-                                Descargar
+                            
+                            <a href="${juego.enlace}" target="_blank" rel="noopener noreferrer" class="relative group/btn overflow-hidden block text-center w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold py-3 rounded-xl hover:bg-emerald-600 dark:hover:bg-emerald-400 dark:hover:text-black transition-all duration-300 shadow-sm flex items-center justify-center gap-2">
+                                <span>Descargar Gratis</span>
+                                <svg class="w-4 h-4 group-hover/btn:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             </a>
                         `;
                         gridJuegos.appendChild(card);
@@ -343,29 +570,103 @@
                 }
             }
 
-            // Renderizar la lista inicial
-            renderizarJuegos(todosLosJuegos);
 
-            // Evento para el buscador
-            if(buscadorInput) {
-                buscadorInput.addEventListener('input', (e) => {
-                    const termino = e.target.value.toLowerCase().trim();
-                    
-                    if (termino === '') {
-                        renderizarJuegos(todosLosJuegos);
-                        return;
+            function filtrarJuegos() {
+                const termino = buscadorInput ? buscadorInput.value.toLowerCase().trim() : '';
+
+                if (clearSearchBtn) {
+                    if (termino.length > 0) {
+                        clearSearchBtn.classList.remove('hidden');
+                    } else {
+                        clearSearchBtn.classList.add('hidden');
                     }
+                }
 
-                    const filtrados = todosLosJuegos.filter(juego => {
-                        return juego.nombre.toLowerCase().includes(termino) || 
-                               juego.categoria.toLowerCase().includes(termino) ||
-                               juego.descripcion.toLowerCase().includes(termino);
-                    });
+                const resultados = todosLosJuegos.filter(juego => {
+                    const coincideNombre = juego.nombre.toLowerCase().includes(termino);
+                    const coincideCategoria = juego.categoria.toLowerCase().includes(termino);
+                    const coincideDescripcion = juego.descripcion.toLowerCase().includes(termino);
+                    const coincideTexto = coincideNombre || coincideCategoria || coincideDescripcion;
 
-                    renderizarJuegos(filtrados);
+                    const coincideBotonCategoria = categoriaActual === 'todos' || 
+                        juego.categoria.toLowerCase().includes(categoriaActual.toLowerCase());
+
+                    return coincideTexto && coincideBotonCategoria;
+                });
+
+                renderizarJuegos(resultados);
+            }
+
+            // Eventos del buscador e inputs
+            if(buscadorInput) {
+                buscadorInput.addEventListener('input', filtrarJuegos);
+            }
+
+            if(clearSearchBtn) {
+                clearSearchBtn.addEventListener('click', () => {
+                    buscadorInput.value = '';
+                    filtrarJuegos();
+                    buscadorInput.focus();
                 });
             }
+
+            if(resetSearchBtn) {
+                resetSearchBtn.addEventListener('click', () => {
+                    if(buscadorInput) buscadorInput.value = '';
+                    categoriaActual = 'todos';
+                    
+                    categoriaBtns.forEach(btn => {
+                        btn.className = "btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap";
+                        if(btn.dataset.categoria === 'todos') {
+                            btn.className = "btn-categoria bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap shadow-sm";
+                        }
+                    });
+
+                    filtrarJuegos();
+                });
+            }
+
+
+            // Eventos de botones de categoría
+            categoriaBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    categoriaActual = e.target.dataset.categoria;
+                    
+                    categoriaBtns.forEach(b => {
+                        b.className = "btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap";
+                    });
+
+                    e.target.className = "btn-categoria bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap shadow-sm";
+
+                    filtrarJuegos();
+                });
+            });
+
+            // Botón volver arriba
+            const backToTopBtn = document.getElementById('back-to-top');
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Renderizado inicial
+            renderizarJuegos(todosLosJuegos);
         });
     </script>
+
+    <!-- Keyframes inline para tarjetas -->
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </body>
 </html>
