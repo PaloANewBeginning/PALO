@@ -261,6 +261,7 @@
                 <button data-categoria="Fútbol" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">Fútbol</button>
                 <button data-categoria="Plataformas" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">Plataformas</button>
                 <button data-categoria="Estrategia" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">Estrategia</button>
+                <button data-categoria="Póker" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">Póker</button>
             </div>
 
             <!-- Contador de juegos -->
@@ -428,7 +429,7 @@
             revealElements.forEach(el => revealObserver.observe(el));
 
 
-            // --- BASE DE DATOS COMPLETA DE JUEGOS (MANTENIENDO TODOS LOS EXISTENTES) ---
+            // --- BASE DE DATOS COMPLETA DE JUEGOS ---
             const todosLosJuegos = [
                 {
                     nombre: "Cruel",
@@ -491,7 +492,7 @@
                     categoria: "Acción",
                     imagen: "https://assets1.ignimgs.com/2019/06/10/dead-cells---button-fin-1560125633132.jpg?fit=bounds&dpr=1&quality=75&width=188px",
                     enlace: "https://www.mediafire.com/file/76qtmofe3tgpy5i/Dead_Cells_Palo_Store.apk/file",
-                    descripcion: "Dead Cells es un aclamado videojuego que fusiona dos géneros muy populares: roguelike (si mueres, pierdes tu progreso de esa partida) y metroidvania."
+                    descripcion: "Dead Cells es un aclamado videojuego que fusiona dos géneros muy populares roguelike si mueres, pierdes tu progreso de esa partida) y metroidvania."
                 },
                 {
                     nombre: "The Amazing Spider-Man 2",
@@ -513,7 +514,29 @@
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGlJ0Qa_o3PSnyWAcw5x0NPTL9IT84dynPzN9uOdJGsD8WKpHU2kg17EBpnl8S-NUAojtBUyr8kc5etYR2VSmUzHuNoRYo60Fe8O_kmetg4tohDYuupE4g_S0IbXe70JLBsfiNfFy43XDiKXc1EKDHxKCbmAY08n1A4H7rg6qkMzIHwQSxOc8oXfhiXYw/s320/images%20(3).jpeg",
                     enlace: "https://www.mediafire.com/file/3a8agrzo6z21v4j/FIFA-16-PALO_STORE.zip/file",
                     descripcion: "Se priorizó el equilibrio entre ataque y defensa. Destacó la Agilidad Defensiva para frenar a los atacantes rápidos, el sistema de Inteligencia de Intercepción en el mediocampo y los nuevos",
+                },
+                {
+                    nombre: "Balatro",
+                    categoria: "Póker",
+                    imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMJp7pPP1OlAa9EdudskBP__a5XdwyJxqf7kL1FayXzEXHEQ9050j0aD4vdyM-9v0t9hcaq4eTgUDH-Ctkr2ntzWSdCElqmwe1ydteR5B9UKzP755_CAf-tsFsCYN09TM0vzNBOkSNjdBy0zKm-DJ_avOY6lkEhw_PXOXl122H1CzQL5oz6lacO4KeBSo/s320/images.jpeg",
+                    enlace: "https://www.mediafire.com/file/mtg2ghebpezj0hg/Balatro_V1.8_-_PaloStore.apk/file",
+                    descripcion: "Comodines Jokers Son la parte central del juego Son cartas especiales que obtienes y que tienen efectos únicos y permanentes que modifican la forma en que ganas puntos",
+                },
+                {
+                    nombre: "Sonic Mania",
+                    categoria: "Plataformas",
+                    imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtVeDWC3QctcTwdj98QbRPoeUOJoLzUCyQVDMU1qpYh7LdmxH7nNTyvD4AyQC7EEW4KRYjV_bjYCuYG4GNaEbWy8odZlbUcpZdStaDYbW5cxdyzZP3N_p-Sx4C9vcjTQnuAhkam5hYEZkyinC-Tj1nBU_dBb3pbFGiKSY8r5i-S-rdyVNZSm1hdtMiJgo/s320/InShot_20260624_221755748.jpg",
+                    enlace: "https://www.mediafire.com/file/3tk9fdq0pxvu3qh/sonic_mania.apk/file",
+                    descripcion: "Jugabilidad clásica en 2D Vuelve a las plataformas rápidas y basadas en física de los títulos originales de los 90",
+                },
+                {
+                    nombre: "Dead Space HD",
+                    categoria: "Terror",
+                    imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVB2d4yU92bCrSIg7Kado7jIivAwfqvbYD-eLNIVYR6zIkiD6D6zkZq9QgGFdeLJo1mko93dFLVmphwjSIDnnd-Xc3GaSvTQtCvbGvF4-cp8AbIRAfYMLFmTMJ3MqWWNqPMm6IuLTyTQWfsUjgc3lQZHwQZBdpH2Efan6dDBBmdBT5svF86KHFbB6_qZE/s320/images%20(1).jpeg",
+                    enlace: "https://www.mediafire.com/file/jash6jg371dci8e/Dead_Space_HD_Android_15_Fix.apk/file",
+                    descripcion: "​Te pones en el traje de Vandal que más tarde se revela que es una mujer llamada Karrie Norton un nuevo converso a la religión de la Uniología",
                 }
+
             ];
 
             const gridJuegos = document.getElementById('grid-juegos');
