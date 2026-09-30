@@ -52,7 +52,6 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
         
-        /* Animaciones para scroll reveal */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -65,18 +64,6 @@
             transform: translateY(0);
         }
 
-        .reveal-scale {
-            opacity: 0;
-            transform: scale(0.92);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .reveal-scale.active {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Ocultar scrollbar sin deshabilitar scroll */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -85,13 +72,6 @@
             scrollbar-width: none;
         }
 
-        /* Efecto de tarjetas y brillo */
-        .glass-card {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        /* Animación suave para cambio de icono de tema */
         .theme-icon-spin {
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -125,19 +105,17 @@
                     <a href="#juegos" class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors px-3 py-2 text-sm font-medium">Catálogo</a>
                     <a href="#caracteristicas" class="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors px-3 py-2 text-sm font-medium">Ventajas</a>
                     
-                    <!-- Botón Selector de Tema Oscuro / Claro -->
+                    <!-- Botón Selector de Tema -->
                     <button id="theme-toggle" type="button" aria-label="Cambiar tema" class="theme-btn p-2.5 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white transition-all duration-300">
-                        <!-- Icono Sol (Tema claro activo) -->
                         <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 theme-icon-spin text-amber-500" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
-                        <!-- Icono Luna (Tema oscuro activo) -->
                         <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 theme-icon-spin text-zinc-700" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                         </svg>
                     </button>
 
-                    <a href="https://www.mediafire.com/file/s6wae73ng8gyurq/Palo_Store.apk/file" target="_blank" rel="noopener noreferrer" class="relative group overflow-hidden bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
+                    <a href="" target="_blank" rel="noopener noreferrer" class="relative group overflow-hidden bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105">
                         <span class="relative z-10 flex items-center gap-2">
                             <span>Descargar App</span>
                             <svg class="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
@@ -146,7 +124,7 @@
                     </a>
                 </div>
 
-                <!-- Botones Menú Móvil & Tema Móvil -->
+                <!-- Botones Móvil -->
                 <div class="md:hidden flex items-center gap-2">
                     <button id="theme-toggle-mobile" type="button" aria-label="Cambiar tema" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 focus:outline-none">
                         <svg id="theme-toggle-light-icon-mobile" class="hidden w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
@@ -177,13 +155,11 @@
 
     <!-- Sección Hero -->
     <main id="inicio" class="relative pt-36 pb-20 sm:pt-44 sm:pb-32 overflow-hidden bg-white dark:bg-zinc-950 transition-colors duration-400">
-        <!-- Fondos animados brillantes / Glows -->
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/10 dark:bg-emerald-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
         <div class="absolute top-1/3 left-1/4 w-[350px] h-[350px] bg-sky-500/10 dark:bg-sky-500/15 rounded-full blur-3xl pointer-events-none animate-float" style="animation-delay: -2s;"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-4xl mx-auto">
-                <!-- Badge interactivo -->
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 mb-8 animate-float">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
                     <span class="text-xs font-bold tracking-wider text-gray-600 dark:text-gray-300 uppercase">Juegos y Ports para Android</span>
@@ -200,9 +176,8 @@
                     Descarga <span class="font-semibold text-gray-900 dark:text-white">Palo A New Beginning</span> para explorar la mejor colección de títulos, clásicos inolvidables y adaptaciones exclusivas para tu Android.
                 </p>
 
-                <!-- Botones de Acción Hero -->
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4 reveal" style="transition-delay: 0.2s;">
-                    <a href="https://www.mediafire.com/file/s6wae73ng8gyurq/Palo_Store.apk/file" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-800 dark:hover:bg-gray-100 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-black/10 dark:shadow-white/5 flex items-center justify-center gap-3 group">
+                    <a href="" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-800 dark:hover:bg-gray-100 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-black/10 dark:shadow-white/5 flex items-center justify-center gap-3 group">
                         <svg class="w-6 h-6 text-emerald-400 dark:text-emerald-600 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         <span>Descargar APK Oficial</span>
                     </a>
@@ -212,7 +187,6 @@
                     </a>
                 </div>
 
-                <!-- Métricas destacadas -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-2xl mx-auto mt-16 pt-10 border-t border-gray-100 dark:border-zinc-900 reveal" style="transition-delay: 0.3s;">
                     <div class="flex flex-col items-center">
                         <span class="text-2xl sm:text-3xl font-black text-black dark:text-white">100%</span>
@@ -231,10 +205,9 @@
         </div>
     </main>
 
-    <!-- Sección de Juegos (Buscador, Filtros y Grid) -->
+    <!-- Sección de Juegos -->
     <section id="juegos" class="py-24 bg-gray-100/70 dark:bg-zinc-900/60 min-h-screen transition-colors duration-400 border-t border-gray-200/60 dark:border-zinc-800/60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
             <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 gap-6 reveal">
                 <div>
                     <div class="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-2">
@@ -244,7 +217,6 @@
                     <p class="text-gray-600 dark:text-gray-400 mt-2 font-normal">Encuentra tus títulos favoritos e instálalos fácilmente.</p>
                 </div>
                 
-                <!-- Buscador Animado -->
                 <div class="w-full lg:w-96 relative">
                     <input type="text" id="buscador" placeholder="Buscar por nombre, categoría..." class="w-full bg-white dark:bg-zinc-950 border border-gray-300 dark:border-zinc-800 text-gray-900 dark:text-white text-sm rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 block px-4 py-3.5 pl-11 transition-all duration-300 shadow-sm placeholder-gray-400 dark:placeholder-gray-500">
                     <svg class="w-5 h-5 text-gray-400 dark:text-gray-500 absolute left-3.5 top-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
@@ -252,7 +224,7 @@
                 </div>
             </div>
 
-            <!-- Filtros Rápidos por Categoría -->
+            <!-- Filtros Rápidos -->
             <div id="categoria-filtros" class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar reveal" style="transition-delay: 0.1s;">
                 <button data-categoria="todos" class="btn-categoria bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap shadow-sm">Todos</button>
                 <button data-categoria="FPS" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">FPS</button>
@@ -265,17 +237,12 @@
                 <button data-categoria="PC" class="btn-categoria bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-zinc-700 px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap">PC</button>
             </div>
 
-            <!-- Contador de juegos -->
             <div class="mb-6 flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 font-semibold px-1">
                 <span id="contador-juegos">Mostrando juegos...</span>
             </div>
 
-            <!-- Contenedor donde se insertarán los juegos por JavaScript -->
-            <div id="grid-juegos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Los juegos se inyectan aquí automáticamente -->
-            </div>
+            <div id="grid-juegos" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
             
-            <!-- Mensaje cuando no hay resultados en el buscador -->
             <div id="no-resultados" class="hidden text-center py-24 bg-white dark:bg-zinc-950 rounded-3xl border border-gray-200 dark:border-zinc-800 mt-4 shadow-sm">
                 <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gray-100 dark:bg-zinc-900 flex items-center justify-center text-gray-400">
                     <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -289,17 +256,40 @@
         </div>
     </section>
 
-    <!-- Sección ¿Por qué elegirnos? -->
+    <!-- Sección de Ventajas & Guía de Seguridad -->
     <section id="caracteristicas" class="py-24 bg-white dark:bg-zinc-950 border-y border-gray-200/80 dark:border-zinc-800/80 transition-colors duration-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16 reveal">
                 <span class="text-xs font-extrabold tracking-widest text-emerald-600 dark:text-emerald-400 uppercase">Experiencia Optimizada</span>
                 <h2 class="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight mt-2">¿Por qué usar Palo Store?</h2>
-                <p class="text-gray-500 dark:text-gray-400 mt-3 font-normal">Te ofrecemos la mejor manera de descubrir e instalar juegos en tu teléfono Android.</p>
+                <p class="text-gray-500 dark:text-gray-400 mt-3 font-normal">Te ofrecemos la mejor manera de descubrir e instalar juegos en tu teléfono Android con total transparencia.</p>
             </div>
 
+            <!-- Tarjeta Destacada de Guía de Seguridad (Integrada en Ventajas) -->
+            <div class="mb-12 p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-emerald-50/70 via-teal-50/40 to-sky-50/60 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 border-2 border-emerald-500/30 dark:border-emerald-500/20 shadow-xl reveal">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">Información Relevante</span>
+                        <h3 class="text-2xl font-black text-gray-900 dark:text-white">Aviso Importante</h3>
+                    </div>
+                </div>
+                
+                <div class="space-y-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed font-normal">
+                    <p>Recordatorio: antes de entrar, quiero aclarar que nuestras APKs son editadas.</p>
+                    <p>Me explico: nosotros agarramos archivos de páginas como, por ejemplo, Espacio APK, APK Vision o similares.</p>
+                    <p>A estas APKs les quitamos cualquier tipo de malware, en especial de APK Vision, ya que suelen tener muchos permisos excesivos y archivos muy raros. Nosotros removemos todo eso.</p>
+                    <p>Lo que sí va a pasar es que si usas nuestras APKs en VirusTotal, solo te va a salir un motor de detección, pero esto ocurre porque se modificó la firma original de la APK, algo común que también sucede con las APKs de APK Vision y muchos sitios que editan aplicaciones para optimizarlas.</p>
+                    <p>Eso sí, <strong>no editamos todas las APKs</strong>; solo aquellas que contienen malware o código sospechoso. Si un archivo viene completamente limpio, simplemente se sube a la página sin tocar nada.</p>
+                    <p>Hacemos esto para mantener la seguridad de los usuarios, para que te sientas cómodo navegando y sin ningún miedo presente. Esto aplica tanto para juegos de PC como para las versiones de Android en formato APK. Sin más que decir, recuerda que <strong>nuestras APKs son seguras</strong>.</p>
+                    <p class="font-semibold text-emerald-700 dark:text-emerald-400 pt-2 italic">Y no, por favor no hagas clic en las marcas de agua.</p>
+                </div>
+            </div>
+
+            <!-- Otras Tarjetas de Ventajas -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Tarjeta 1 -->
                 <div class="p-8 rounded-3xl bg-gray-50 dark:bg-zinc-900 border border-gray-200/80 dark:border-zinc-800 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group reveal">
                     <div class="w-14 h-14 bg-emerald-100 dark:bg-emerald-950/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <svg class="w-7 h-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
@@ -308,7 +298,6 @@
                     <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Títulos probados y verificados para garantizar compatibilidad y óptimo rendimiento en tu dispositivo Android.</p>
                 </div>
 
-                <!-- Tarjeta 2 -->
                 <div class="p-8 rounded-3xl bg-gray-50 dark:bg-zinc-900 border border-gray-200/80 dark:border-zinc-800 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group reveal" style="transition-delay: 0.1s;">
                     <div class="w-14 h-14 bg-sky-100 dark:bg-sky-950/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <svg class="w-7 h-7 text-sky-600 dark:text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -317,7 +306,6 @@
                     <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed font-light">Descargas inmediatas alojadas en servidores rápidos como MediaFire, sin acortadores molestos.</p>
                 </div>
 
-                <!-- Tarjeta 3 -->
                 <div class="p-8 rounded-3xl bg-gray-50 dark:bg-zinc-900 border border-gray-200/80 dark:border-zinc-800 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group reveal" style="transition-delay: 0.2s;">
                     <div class="w-14 h-14 bg-purple-100 dark:bg-purple-950/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <svg class="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
@@ -349,9 +337,78 @@
         </div>
     </footer>
 
+    <!-- Ventana Modal de Primera Visita (Guía de Seguridad) -->
+    <div id="welcome-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 px-4">
+        <div id="modal-content" class="bg-white dark:bg-zinc-900 max-w-2xl w-full rounded-3xl p-8 sm:p-10 shadow-2xl border border-gray-200 dark:border-zinc-800 transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-md shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">Información Relevante</span>
+                    <h2 class="text-2xl font-black text-gray-900 dark:text-white">Aviso Importante</h2>
+                </div>
+            </div>
+            
+            <div class="space-y-4 text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed font-normal mb-8">
+                <p>Recordatorio: antes de entrar, quiero aclarar que nuestras APKs son editadas.</p>
+                <p>Me explico: nosotros agarramos archivos de páginas como, por ejemplo, Espacio APK, APK Vision o similares.</p>
+                <p>A estas APKs les quitamos cualquier tipo de malware, en especial de APK Vision, ya que suelen tener muchos permisos excesivos y archivos muy raros. Nosotros removemos todo eso.</p>
+                <p>Lo que sí va a pasar es que si usas nuestras APKs en VirusTotal, solo te va a salir un motor de detección, pero esto ocurre porque se modificó la firma original de la APK, algo común que también sucede con las APKs de APK Vision y muchos sitios que editan aplicaciones para optimizarlas.</p>
+                <p>Eso sí, <strong>no editamos todas las APKs</strong>; solo aquellas que contienen malware o código sospechoso. Si un archivo viene completamente limpio, simplemente se sube a la página sin tocar nada.</p>
+                <p>Hacemos esto para mantener la seguridad de los usuarios, para que te sientas cómodo navegando y sin ningún miedo presente. Esto aplica tanto para juegos de PC como para las versiones de Android en formato APK. Sin más que decir, recuerda que <strong>nuestras APKs son seguras</strong>.</p>
+                <p class="font-semibold text-emerald-700 dark:text-emerald-400 italic">Y no, por favor no hagas clic en las marcas de agua.</p>
+            </div>
+
+            <button id="close-modal-btn" class="w-full bg-black dark:bg-white text-white dark:text-black py-4 rounded-2xl font-bold text-base hover:opacity-90 transition-opacity shadow-lg">
+                Entendido, continuar a la página
+            </button>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
+            // --- LOGICA DE PRIMERA VISITA (MODAL DE SEGURIDAD) ---
+            const welcomeModal = document.getElementById('welcome-modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            const hasVisited = localStorage.getItem('palo_store_visited_v1');
+
+            if (!hasVisited) {
+                // Mostrar modal tras un pequeño retraso
+                setTimeout(() => {
+                    if (welcomeModal && modalContent) {
+                        welcomeModal.classList.remove('opacity-0', 'pointer-events-none');
+                        modalContent.classList.remove('scale-95');
+                        modalContent.classList.add('scale-100');
+                    }
+                }, 400);
+            }
+
+            function cerrarModal() {
+                if (welcomeModal && modalContent) {
+                    modalContent.classList.remove('scale-100');
+                    modalContent.classList.add('scale-95');
+                    welcomeModal.classList.add('opacity-0', 'pointer-events-none');
+                    localStorage.setItem('palo_store_visited_v1', 'true');
+                }
+            }
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', cerrarModal);
+            }
+
+            if (welcomeModal) {
+                welcomeModal.addEventListener('click', (e) => {
+                    if (e.target === welcomeModal) {
+                        cerrarModal();
+                    }
+                });
+            }
+
+
             // --- LOGICA DE CAMBIO DE TEMA OSCURO / CLARO ---
             const themeToggleBtn = document.getElementById('theme-toggle');
             const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
@@ -379,7 +436,6 @@
                 }
             }
 
-            // Comprobar preferencia previa guardada o del sistema
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             
@@ -430,7 +486,7 @@
             revealElements.forEach(el => revealObserver.observe(el));
 
 
-            // --- BASE DE DATOS COMPLETA DE JUEGOS ---
+            // --- BASE DE DATOS DE JUEGOS ---
             const todosLosJuegos = [
                 {
                     nombre: "Cruel",
@@ -514,56 +570,56 @@
                     categoria: "Fútbol",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGlJ0Qa_o3PSnyWAcw5x0NPTL9IT84dynPzN9uOdJGsD8WKpHU2kg17EBpnl8S-NUAojtBUyr8kc5etYR2VSmUzHuNoRYo60Fe8O_kmetg4tohDYuupE4g_S0IbXe70JLBsfiNfFy43XDiKXc1EKDHxKCbmAY08n1A4H7rg6qkMzIHwQSxOc8oXfhiXYw/s320/images%20(3).jpeg",
                     enlace: "https://www.mediafire.com/file/3a8agrzo6z21v4j/FIFA-16-PALO_STORE.zip/file",
-                    descripcion: "Se priorizó el equilibrio entre ataque y defensa. Destacó la Agilidad Defensiva para frenar a los atacantes rápidos, el sistema de Inteligencia de Intercepción en el mediocampo y los nuevos",
+                    descripcion: "Se priorizó el equilibrio entre ataque y defensa. Destacó la Agilidad Defensiva para frenar a los atacantes rápidos y el sistema de intercepción."
                 },
                 {
                     nombre: "Balatro",
                     categoria: "Póker",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMJp7pPP1OlAa9EdudskBP__a5XdwyJxqf7kL1FayXzEXHEQ9050j0aD4vdyM-9v0t9hcaq4eTgUDH-Ctkr2ntzWSdCElqmwe1ydteR5B9UKzP755_CAf-tsFsCYN09TM0vzNBOkSNjdBy0zKm-DJ_avOY6lkEhw_PXOXl122H1CzQL5oz6lacO4KeBSo/s320/images.jpeg",
                     enlace: "https://www.mediafire.com/file/mtg2ghebpezj0hg/Balatro_V1.8_-_PaloStore.apk/file",
-                    descripcion: "Comodines Jokers Son la parte central del juego Son cartas especiales que obtienes y que tienen efectos únicos y permanentes que modifican la forma en que ganas puntos",
+                    descripcion: "Comodines Jokers. Son cartas especiales que obtienes y que tienen efectos únicos y permanentes que modifican la forma en que ganas puntos."
                 },
                 {
                     nombre: "Sonic Mania",
                     categoria: "Plataformas",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtVeDWC3QctcTwdj98QbRPoeUOJoLzUCyQVDMU1qpYh7LdmxH7nNTyvD4AyQC7EEW4KRYjV_bjYCuYG4GNaEbWy8odZlbUcpZdStaDYbW5cxdyzZP3N_p-Sx4C9vcjTQnuAhkam5hYEZkyinC-Tj1nBU_dBb3pbFGiKSY8r5i-S-rdyVNZSm1hdtMiJgo/s320/InShot_20260624_221755748.jpg",
                     enlace: "https://www.mediafire.com/file/3tk9fdq0pxvu3qh/sonic_mania.apk/file",
-                    descripcion: "Jugabilidad clásica en 2D Vuelve a las plataformas rápidas y basadas en física de los títulos originales de los 90",
+                    descripcion: "Jugabilidad clásica en 2D. Vuelve a las plataformas rápidas y basadas en física de los títulos originales de los 90."
                 },
                 {
                     nombre: "Dead Space HD",
                     categoria: "Terror",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiVB2d4yU92bCrSIg7Kado7jIivAwfqvbYD-eLNIVYR6zIkiD6D6zkZq9QgGFdeLJo1mko93dFLVmphwjSIDnnd-Xc3GaSvTQtCvbGvF4-cp8AbIRAfYMLFmTMJ3MqWWNqPMm6IuLTyTQWfsUjgc3lQZHwQZBdpH2Efan6dDBBmdBT5svF86KHFbB6_qZE/s320/images%20(1).jpeg",
                     enlace: "https://www.mediafire.com/file/jash6jg371dci8e/Dead_Space_HD_Android_15_Fix.apk/file",
-                    descripcion: "​Te pones en el traje de Vandal que más tarde se revela que es una mujer llamada Karrie Norton un nuevo converso a la religión de la Uniología",
+                    descripcion: "Te pones en el traje de Vandal, un nuevo converso a la religión de la Uniología en esta emocionante aventura."
                 },
                 {
                     nombre: "Castle Crashers",
                     categoria: "PC",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhO-fHgQ2GVN6IOLBbRYVHD32hqZY8vutSuKZIjT-vy9F7g7xx3fNyB57Gkj_B_vnfAw4-QYJGpnRpibH700avq5D1kOdfg4gF5dqxuMu7RFJ2EBaTA0JFZEy0ApDIKsDysHO3co0w7OI81zdzgRE8S9sdJOH8CB6A7ag7W2jli-V0wIQ78qME-i_thgu4/s320/1664a22b13e4fa07a3b8b89126e8f63848c6031d568a00769d1d7b312c695a63.jpeg",
                     enlace: "https://www.mediafire.com/file/uoq166hfe1gfmtn/Castle_Crashers.zip/file",
-                    descripcion: " Un Festival de Humor y GolpesCastle Crashers es un juego de acción y hack-and-slash con elementos de rol, famoso por su estilo artístico"
+                    descripcion: "Un festival de humor y golpes. Castle Crashers es un juego de acción y hack-and-slash con elementos de rol y estilo único."
                 },
                 {
                     nombre: "Click the Button",
                     categoria: "PC",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9Yvaf4_0pmmw6M16cPYkqI2IrVvxlh0TaHgOP1ChYjhi13KxJcELMIMrZ0oqcJlpno5wIT52Phzdi_52W-eYpyGEF8-PqIc44-8pcDzpVOOaPyORWsWWFYWe8RtrwGabI8RtRDLnozmQzBuaV3LAUPd2Gx9Zg8KzyFJKjCmfFAgM9HuIpwqCgF7StZnc/s460/header.jpg",
                     enlace: "https://www.mediafire.com/file/mynab9cb84ywhbd/Click_the_Button.zip/file",
-                    descripcion: "Consiste en hacer clic repetidamente en un botón para llenar una barra de progreso Al completar la barra el jugador recibe cofres con recompensas dinero y objetos"
+                    descripcion: "Consiste en hacer clic repetidamente en un botón para llenar una barra de progreso y recibir cofres con recompensas."
                 },
                 {
-                    nombre: "Balatro",
+                    nombre: "Balatro (PC)",
                     categoria: "PC",
                     imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjMJp7pPP1OlAa9EdudskBP__a5XdwyJxqf7kL1FayXzEXHEQ9050j0aD4vdyM-9v0t9hcaq4eTgUDH-Ctkr2ntzWSdCElqmwe1ydteR5B9UKzP755_CAf-tsFsCYN09TM0vzNBOkSNjdBy0zKm-DJ_avOY6lkEhw_PXOXl122H1CzQL5oz6lacO4KeBSo/s320/images.jpeg",
                     enlace: "https://www.mediafire.com/file/7icpjuhqgqhhosr/Balatro.7z/file",
-                    descripcion: "Comodines Jokers Son la parte central del juego Son cartas especiales que obtienes y que tienen efectos únicos y permanentes que modifican la forma en que ganas puntos"
+                    descripcion: "Versión para PC del aclamado juego de cartas con comodines únicos y permanentes que modifican la puntuación."
                 },
                 {
                     nombre: "How To Fish",
                     categoria: "Acción",
-                    imagen: "https://imgs.search.brave.com/t2d7imSOlH-m0N2uPuZjsUrOGbq1Om-rViY2W-gN6VA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZWxwbHVyYWwuY29t/L3VwbG9hZHMvczEv/MjYvNzUvNzAvOS9o/b3ctdG8tZmlzaC1l/bC1udWV2by1mZW5v/LW1lbm8tZW4tc3Rl/YW0tZXMtdW4tanVl/Z28tZGUtcGVzY2Et/ZGUtbG8tbWEtcy1k/aXNwYXJhdGFkby5q/cGVn",
+                    imagen: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4001890/45c4ddff4901e32c4b8b643e1b97d0d01898d299/header.jpg?t=1788788717",
                     enlace: "https://mediafire.com/file/vgobar68j069tyz/How+to+Fish+PALO.apk/file",
-                    descripcion: "este título permite cazar peces utilizando una amplia variedad de métodos, desde cañas de pescar hasta armas de fuego (pistolas, escopetas, francotiradores) y explosivos."
+                    descripcion: "Este título permite cazar peces utilizando una amplia variedad de métodos, desde cañas de pescar hasta armas de fuego y explosivos."
                 }
             ];
 
@@ -594,10 +650,8 @@
                     juegosParaMostrar.forEach((juego, index) => {
                         const card = document.createElement('div');
                         
-                        // Clases con hover animations y soporte tema oscuro
                         card.className = "bg-white dark:bg-zinc-950 rounded-3xl p-5 shadow-sm hover:shadow-2xl border border-gray-200/80 dark:border-zinc-800/80 hover:border-black dark:hover:border-zinc-600 hover:-translate-y-2 transition-all duration-300 group flex flex-col justify-between h-full relative overflow-hidden";
                         
-                        // Animación escalonada según índice
                         card.style.animation = `fadeInUp 0.5s ease-out ${index * 0.05}s forwards`;
                         card.style.opacity = '0';
 
@@ -618,7 +672,7 @@
                             </div>
                             
                             <a href="${juego.enlace}" target="_blank" rel="noopener noreferrer" class="relative group/btn overflow-hidden block text-center w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs font-bold py-3 rounded-xl hover:bg-emerald-600 dark:hover:bg-emerald-400 dark:hover:text-black transition-all duration-300 shadow-sm flex items-center justify-center gap-2">
-                                <span>Descargar Gratis</span>
+                                <span>Descargar</span>
                                 <svg class="w-4 h-4 group-hover/btn:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             </a>
                         `;
@@ -654,7 +708,6 @@
                 renderizarJuegos(resultados);
             }
 
-            // Eventos del buscador e inputs
             if(buscadorInput) {
                 buscadorInput.addEventListener('input', filtrarJuegos);
             }
@@ -683,8 +736,6 @@
                 });
             }
 
-
-            // Eventos de botones de categoría
             categoriaBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     categoriaActual = e.target.dataset.categoria;
@@ -699,7 +750,6 @@
                 });
             });
 
-            // Botón volver arriba
             const backToTopBtn = document.getElementById('back-to-top');
             if (backToTopBtn) {
                 backToTopBtn.addEventListener('click', () => {
@@ -707,12 +757,10 @@
                 });
             }
 
-            // Renderizado inicial
             renderizarJuegos(todosLosJuegos);
         });
     </script>
 
-    <!-- Keyframes inline para tarjetas -->
     <style>
         @keyframes fadeInUp {
             from {
